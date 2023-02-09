@@ -1,6 +1,6 @@
 {
   "name": "read-alice",
-  "version": "0.0.15-alpha",
+  "version": "0.0.16-alpha",
   "description": "Generate a website for an NFT collection built with Large.",
   "repository": {
     "type": "git",
