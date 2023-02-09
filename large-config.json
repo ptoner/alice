@@ -1,0 +1,26 @@
+{
+    "hostname": "https://readalice.com",
+    "showMintPage": true,
+    "showActivityPage": true,
+    "marketplaces": [
+        {
+            "name": "OpenSea",
+            "link": "https://opensea.io/collection/alices-adventures-in-wonderland"
+        },
+        {
+            "name": "LooksRare"
+        }
+    ],
+    "externalLinks": [
+        {
+            "name": "Discord",
+            "link": "https://discord.gg/yJtjqHvqXm"
+        },
+        {
+            "name": "Twitter",
+            "link": "https://twitter.com/large_nft"
+        }
+    ],
+
+    "headStart": "src/headStart.ejs"
+}

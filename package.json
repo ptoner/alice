@@ -1,0 +1,34 @@
+{
+  "name": "large-reader",
+  "version": "0.0.15-alpha",
+  "description": "Generate a website for an NFT collection built with Large.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://gitlab.com/ptoner/alice-s-adventures-in-wonderland-reader"
+  },
+  "scripts": {
+    "serve": "node ./node_modules/http-server/bin/http-server -p 8081 -c-1",
+    "generate": "node node_modules/large-nft/public/generate/index.js",
+    "generate:dev": "node node_modules/large-nft/public/generate/index.js --env dev",
+    "sync": "node --no-experimental-fetch node_modules/large-nft/public/sync/index.js",
+    "start": "node --no-experimental-fetch node_modules/large-nft/public/start.js",
+    "start:dev": "node --no-experimental-fetch node_modules/large-nft/public/start.js --env dev"
+  },
+  "keywords": [],
+  "author": "Patrick Toner",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://gitlab.com/ptoner/alice-s-adventures-in-wonderland-reader/issues"
+  },
+  "type": "module",
+  "homepage": "https://readalice.com",
+  "devDependencies": {
+
+    "http-server": "14.1.1",
+    "fastify": "4.12.0",
+    "@fastify/static": "6.8.0",
+    "convert-svg-to-png": "0.6.4",
+
+    "large-nft": "0.5.13-alpha"
+  }
+}
