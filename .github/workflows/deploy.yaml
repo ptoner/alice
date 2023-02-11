@@ -10,17 +10,11 @@ jobs:
     steps:
 
       - uses: 'actions/checkout@v3'
-
-      - id: 'auth'
-        name: 'Authenticate to Google Cloud'
-        uses: 'google-github-actions/auth@v1'
-        with:
-          credentials_json: '${{ secrets.gcp_credentials }}'
-
       - uses: ptoner/gcp-storage-sync@main
         with:
           args: -d
         env:
+          GCP_SERVICE_ACCOUNT_KEY_FILE: '${{ secrets.gcp_credentials }}'
           GCP_STORAGE_BUCKET: 'large-reader'
           SOURCE_DIR: "public"
           DEST_DIR: "read-alice"
