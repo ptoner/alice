@@ -18,7 +18,10 @@ jobs:
           credentials_json: '${{ secrets.gcp_credentials }}'
 
       - id: 'upload-files'
-        uses: 'google-github-actions/upload-cloud-storage@v1'
+      - uses: ptoner/gcp-storage-sync@main
         with:
-          path: 'public'
-          destination: 'large-reader/read-alice'
+          args: -d
+        env:
+          GCP_STORAGE_BUCKET: 'large-reader'
+          SOURCE_DIR: "public"
+          DEST_DIR: "read-alice"
