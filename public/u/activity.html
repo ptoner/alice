@@ -1,0 +1,342 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-P3HBBWJ4X4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-P3HBBWJ4X4');
+</script>
+
+    <style>
+        html {
+            visibility: hidden;
+            opacity: 0;
+        }
+    </style>
+
+    <!-- Required meta tags-->
+    <meta charset="utf-8">
+    <meta name="viewport"
+    content="width=device-width, initial-scale=1, maximum-scale=5, minimum-scale=1, user-scalable=yes, minimal-ui, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <!-- Color theme for statusbar -->
+    <title>
+        User Activity for Alice&#39;s Adventures in Wonderland    </title>
+
+    <meta property="og:title" content="User Activity for Alice&#39;s Adventures in Wonderland" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="/u" />
+    <meta property="og:image"
+        content="https://readalice.com/backup/export/images/QmeL8dxWDhVAMA4o4PDzMiF6C8avTuQnkHDGbvoNZszxLS.jpg" />
+    <meta property="og:description" content="User Activity for Alice&#39;s Adventures in Wonderland" />
+
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="/u" />
+    <meta property="twitter:title" content="User Activity for Alice&#39;s Adventures in Wonderland" />
+    <meta property="twitter:description" content="User Activity for Alice&#39;s Adventures in Wonderland" />
+    <meta property="twitter:image"
+        content="https://readalice.com/backup/export/images/QmeL8dxWDhVAMA4o4PDzMiF6C8avTuQnkHDGbvoNZszxLS.jpg" />
+
+    
+        <script defer src="/large/reader/browser/js/runtime.reader.js"></script>
+        <script defer src="/large/reader/browser/js/vendors.reader.js"></script>
+        <script defer src="/large/reader/browser/js/main.reader.js"></script>
+    
+</head>
+
+<body>
+
+    <div id="app">
+
+        <div class="view view-main">
+
+            <div class="page" data-name="user-activity">
+
+                <nav-bar logo="/backup/export/images/QmeL8dxWDhVAMA4o4PDzMiF6C8avTuQnkHDGbvoNZszxLS.jpg" title="User" active="User" show_mint_page="true"
+                    show_activity_page="true">
+                </nav-bar>
+
+
+                <div class="page-content">
+
+                    <div class="row">
+
+                        <div class="fixed-width-content center">
+
+                            <div class="hidden-on-load">
+
+                                <div class="block block-strong inset col-100 no-margin-bottom">
+                                    <div class="breadcrumbs ">
+                                        <div class="breadcrumbs-item">
+                                            <a href="/index.html" class="link">
+                                                Home
+                                            </a>
+                                        </div>
+                                        <div class="breadcrumbs-separator"></div>
+                                        <div class="breadcrumbs-item">
+                                            <a href="/leaderboard">Leaderboard</a>
+                                        </div>
+                                        <div class="breadcrumbs-separator"></div>
+                                        <div class="breadcrumbs-item breadcrumbs-item-active">
+                                            <a href="/u/?address=${address}">${address}</a>
+                                        </div>
+                                    </div>
+                                </div>
+    
+                                <div class="block-title block-title-large">Account Details</div>
+                                <div class="block-header">
+                                    ${address}
+                                </div>
+    
+                                <div class="block">
+    
+                                    <div class="user-info">
+    
+                                        <div class="row">
+                                            <div class="col-50">Etherscan</div>
+                                            <div class="col-50">
+                                                
+                                                <a href="https://etherscan.io/address/${address}"
+                                                    class="item-link external">${address ?
+                                                    walletService.truncateEthAddress(address) : ' '}</a>
+                                            </div>
+                                        </div>
+    
+                                        ${tokenOwner?.ensName ? $h`
+                                            <div class="row">
+                                                <div class="col-50">ENS Name</div>
+                                                <div class="col-50">${tokenOwner.ensName}</div>
+                                            </div>
+                                        ` : $h` `}
+    
+                                        <div class="row">
+                                            <div class="col-50">Tokens Owned</div>
+                                            <div class="col-50"><strong>${tokenOwner?.count}</strong></div>
+                                        </div>
+    
+                                    </div>
+    
+                                </div>
+    
+    
+                                <div class="block">
+                                    <p class="segmented">
+                                        <a class="button button-outline"
+                                            href="/u/?address=${address}">Owned</a>
+                                        <a class="button button-outline button-active" href="#">Activity</a>
+                                    </p>
+                                </div>
+    
+                                ${transactionsViewModel?.transactions?.length > 0 ? $h`
+                    
+                                    <div class="block-title block-title-medium">
+                                        <div class="last-updated">Last updated: ${moment(transactionsViewModel.lastUpdated).fromNow()}</div>
+                                        Activity
+                                    </div>
+                                    <transaction-row transactions="${transactionsViewModel}" items="${transactionsViewModel.rowItemViewModels}"></transaction-row>
+                             
+                                    <div class="block margin-top margin-bottom">
+                                        <div class="row">
+                                            <div class="col-50">
+                                                ${previousPageStartId ? $h`
+                                                <a href="${baseURL}u/activity?startId=${previousPageStartId}&address=${address}" class="button button-outline color-gray">Previous</a>
+                                                ` : $h` `}
+                                            </div>
+                                            <div class="col-50">
+                                                ${nextPageStartId ? $h`
+                                                <a href="${baseURL}u/activity?startId=${nextPageStartId}&address=${address}" class="button button-fill">Next</a>
+                                                ` : $h` `}
+                                            </div>
+                                        </div>
+                            
+                                    </div>
+                            
+                                ` : $h`<span />`}
+
+                            </div>
+
+                            
+                            <div class="hide-on-pageinit">
+
+                                <div class="card skeleton-text">
+                                    <div class="card-header">Activity</div>
+                                    <div class="card-content card-content-padding data-table">
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi
+                                        lobortis et massa ac interdum. Cras consequat felis at consequat hendrerit.
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                                          
+<div class="block block-strong inset">
+
+    <span class="footer-link">
+      <strong>Large NFT</strong> code licensed under <a href="https://github.com/LargeNFT/large-nft/blob/master/LICENSE.md" class="external">MIT</a>
+    </span>
+
+    |
+
+    <span class="footer-link">
+      <a href="https://github.com/LargeNFT/large-nft" class="external">GitHub</a>
+    </span>
+
+    |
+
+    <span class="footer-link">
+      <a href="https://twitter.com/large_nft" class="external">Twitter</a>
+    </span>
+
+</div>
+
+                        </div>
+
+
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+    
+    <script type="module" id="page-init-scripts">
+
+
+
+
+        const init = (props, { $, $f7, $h, $on, $update }) => {
+
+            let transactionWebService = globalThis.container.get("TransactionWebService")
+            let tokenOwnerService = globalThis.container.get("TokenOwnerService")
+            let walletService = globalThis.container.get("WalletService")
+
+            let baseURL = '/'
+
+            let tokenOwner
+            let transactionsViewModel
+
+            let display = 25
+            let address 
+            let startId
+
+            let nextPageStartId
+            let previousPageStartId
+
+            const loadActivity = async () => {
+
+                loading = true
+
+                try  {
+
+                    nextPageStartId = undefined
+                    previousPageStartId = undefined
+
+                    if ($f7.views.main.router.currentRoute?.query?.address) {
+                        address = $f7.views.main.router.currentRoute?.query?.address
+                    }
+
+                    if ($f7.views.main.router.currentRoute?.query?.startId) {
+                        startId = $f7.views.main.router.currentRoute?.query?.startId
+                    }
+
+                    tokenOwner = await tokenOwnerService.get(address)
+
+                    transactionsViewModel = await transactionWebService.listByAddressFrom(address, 25, startId)
+
+
+                    if (transactionsViewModel.transactions.length == display && transactionsViewModel?.transactions[display-1]?.transaction.previousByTokenOwnerId[address]) {
+                        nextPageStartId = transactionsViewModel.transactions[display-1].transaction.previousByTokenOwnerId[address]
+                    }
+
+                    //If we have a startId we are on page 2+ so we need to set the previous start offset
+                    if (startId) {
+                        let previousTransactionList = await transactionWebService.listByAddressTo(address, display+1, startId)
+
+                        if (previousTransactionList.transactions[display]) {
+                            previousPageStartId = previousTransactionList.transactions[display]?.transaction._id
+                        }
+
+                    }
+
+
+                } catch(ex) { console.log(ex) }
+
+                $('.hidden-on-load').removeClass('hidden-on-load')
+
+
+                loading = false
+
+                await $update()
+
+
+            }
+
+
+
+
+            $on('pageInit', async () => {
+
+                await loadActivity()
+
+                $('.hide-on-pageinit').hide()
+
+                await $update()
+
+            })
+
+
+            document.querySelector('meta[property="og:title"]').setAttribute("content", "User Activity for Alice&#39;s Adventures in Wonderland")
+            document.querySelector('meta[property="og:url"]').setAttribute("content", "/u")
+            document.querySelector('meta[property="og:image"]').setAttribute("content", "https://readalice.com/backup/export/images/QmeL8dxWDhVAMA4o4PDzMiF6C8avTuQnkHDGbvoNZszxLS.jpg")
+            document.querySelector('meta[property="og:description"]').setAttribute("content", "User Activity for Alice&#39;s Adventures in Wonderland")
+
+            document.querySelector('meta[property="twitter:url"]').setAttribute("content", "/u")
+            document.querySelector('meta[property="twitter:title"]').setAttribute("content", "User Activity Alice&#39;s Adventures in Wonderland")
+            document.querySelector('meta[property="twitter:image"]').setAttribute("content", "https://readalice.com/backup/export/images/QmeL8dxWDhVAMA4o4PDzMiF6C8avTuQnkHDGbvoNZszxLS.jpg")
+            document.querySelector('meta[property="twitter:description"]').setAttribute("content", "User Activity for Alice&#39;s Adventures in Wonderland")
+
+            document.querySelector('title').innerHTML = "User Activity Alice&#39;s Adventures in Wonderland"
+
+            $f7.preloader.hide()
+
+            return $render
+
+        }
+
+
+    </script>
+
+    <script type="module" id="page-scripts">
+
+        let baseURL = '/'
+        let hostname = 'https://readalice.com'
+        let channelId = '411f8c34-31d3-4dcb-9139-2f7334377c66'
+        let version = atob('IjAuNS4xNC1hbHBoYSI=').replace('"', '').replace('"', '')
+
+        let routablePages = JSON.parse(`[{"name":"About","locations":["links"],"channelId":"411f8c34-31d3-4dcb-9139-2f7334377c66","slug":"about","dateCreated":"2022-07-12T21:24:16.486Z","_id":"95d31c41-430e-4b92-92b2-4605b05c9e7a"}]`)
+
+        let app = reader.initReader(baseURL, hostname, version, routablePages, channelId)
+
+
+
+    </script>
+
+</body>
+
+</html>
