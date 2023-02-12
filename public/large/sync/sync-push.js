@@ -21192,7 +21192,11 @@ class ProcessConfig {
     }
     static parseDeployArgsIntoOptions(rawArgs) {
         const args = arg__WEBPACK_IMPORTED_MODULE_1___default()({
-            '--dir': String
+            '--dir': String,
+            '--sync-dir': String,
+            '--sync-rate': String,
+            '--alchemy': String,
+            '--clear': String
         }, {
             argv: rawArgs.slice(2),
         });
@@ -21308,6 +21312,16 @@ let SpawnService = class SpawnService {
             //Start sync
             return this.spawnSync(dir);
         });
+    }
+    async spawnGoogleCloudSync(dir, bucketName, destinationDir, args) {
+        let deployProcess = (0,child_process__WEBPACK_IMPORTED_MODULE_0__.spawn)(`gsutil -m rsync $* -r ${dir}/public gs://${bucketName}/${destinationDir}`, [], { shell: true, cwd: dir });
+        deployProcess.stdout.on('data', (data) => {
+            process.stdout.write(data.toString());
+        });
+        deployProcess.stderr.on('data', (data) => {
+            process.stderr.write(data.toString());
+        });
+        return deployProcess;
     }
 };
 SpawnService = __decorate([
