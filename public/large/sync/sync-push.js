@@ -25586,12 +25586,15 @@ let syncPush = async () => {
     console.log('Starting Sync/Push...');
     for (let repo of config.repos) {
         const syncDirectory = path__WEBPACK_IMPORTED_MODULE_3___default().resolve(config.baseDir, repo);
-        await spawnService.spawnGenerateAndSync(syncDirectory);
+        await spawnService.spawnGenerate(syncDirectory);
     }
     async function runLoop() {
-        console.log('Starting push loop');
+        console.log('Starting sync/push/deploy loop');
         for (let repo of config.repos) {
             const syncDirectory = path__WEBPACK_IMPORTED_MODULE_3___default().resolve(config.baseDir, repo);
+            //Sync
+            await spawnService.spawnSync(syncDirectory);
+            //Push
             const git = (0,simple_git__WEBPACK_IMPORTED_MODULE_4__.simpleGit)(syncDirectory);
             try {
                 let status = await git.status();
@@ -25602,6 +25605,7 @@ let syncPush = async () => {
                     await git.add('./');
                     await git.commit('Committing changes');
                     await git.push('origin', branch);
+                    //Deploy
                     await spawnService.spawnDeploy(syncDirectory);
                 }
                 else {
