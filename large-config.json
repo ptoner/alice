@@ -22,5 +22,11 @@
         }
     ],
 
-    "headStart": "src/headStart.ejs"
+    "headStart": "src/headStart.ejs",
+    "deploy": {
+        "googleCloud": {
+            "bucketName": "large-reader",
+            "destinationDir": "read-alice"
+        }
+    }
 }
