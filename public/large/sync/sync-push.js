@@ -21304,28 +21304,31 @@ let SpawnService = class SpawnService {
         });
     }
     async spawnSync(dir, args) {
-        let theArgs = ["--"];
-        if (args) {
-            theArgs.push(...args);
-        }
-        else {
-            theArgs.push(...process.argv?.slice(2));
-        }
-        let syncProcess = (0,child_process__WEBPACK_IMPORTED_MODULE_0__.spawn)(`npm run sync`, theArgs, { shell: true, cwd: dir });
-        syncProcess.stdout.on('data', (data) => {
-            process.stdout.write(data.toString());
-        });
-        syncProcess.stderr.on('data', (data) => {
-            process.stderr.write(data.toString());
-        });
-        syncProcess.on('close', (code) => {
-            console.log(`Sync process exited with code ${code}`);
+        return new Promise(function (resolve, reject) {
+            let theArgs = ["--"];
+            if (args) {
+                theArgs.push(...args);
+            }
+            else {
+                theArgs.push(...process.argv?.slice(2));
+            }
+            let syncProcess = (0,child_process__WEBPACK_IMPORTED_MODULE_0__.spawn)(`npm run sync`, theArgs, { shell: true, cwd: dir });
+            syncProcess.stdout.on('data', (data) => {
+                process.stdout.write(data.toString());
+            });
+            syncProcess.stderr.on('data', (data) => {
+                process.stderr.write(data.toString());
+            });
+            syncProcess.on('close', (code) => {
+                console.log(`Sync process exited with code ${code}`);
+                resolve(syncProcess);
+            });
         });
     }
-    async spawnGenerateAndSync(dir) {
+    async spawnGenerateAndSync(dir, args) {
         // Generate HTML
-        await this.spawnGenerate(dir);
-        return this.spawnSync(dir);
+        await this.spawnGenerate(dir, args);
+        return this.spawnSync(dir, args);
     }
     async spawnGoogleCloudSync(dir, bucketName, destinationDir, args) {
         return new Promise(function (resolve, reject) {
