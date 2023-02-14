@@ -21329,7 +21329,8 @@ let SpawnService = class SpawnService {
     async spawnGoogleCloudCopy(dir, filepath, bucketName, destinationDir) {
         filepath = filepath.replace("public/", "");
         return new Promise(function (resolve, reject) {
-            let rsyncProcess = (0,child_process__WEBPACK_IMPORTED_MODULE_0__.spawn)(`gsutil -m cp -J gs://${bucketName}/${destinationDir}/${filepath}`, [], { shell: true, cwd: `${dir}/public` });
+            console.log(`gsutil -m cp -J ${filepath} gs://${bucketName}/${destinationDir}/${filepath}`);
+            let rsyncProcess = (0,child_process__WEBPACK_IMPORTED_MODULE_0__.spawn)(`gsutil -m cp -J ${filepath} gs://${bucketName}/${destinationDir}/${filepath}`, [], { shell: true, cwd: `${dir}/public` });
             rsyncProcess.stdout.on('data', (data) => {
                 process.stdout.write(data.toString());
             });
@@ -25594,7 +25595,7 @@ let syncPush = async () => {
             await git.push('origin', status.current);
         }
         //Rsync before starting
-        await spawnService.spawnGoogleCloudSync(syncDirectory, config.deploy.googleCloud.bucketName, path__WEBPACK_IMPORTED_MODULE_3___default().basename(syncDirectory));
+        // await spawnService.spawnGoogleCloudSync(syncDirectory, config.deploy.googleCloud.bucketName, path.basename(syncDirectory))
     }
     async function runLoop() {
         console.log('Starting sync/push/deploy loop');
