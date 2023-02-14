@@ -21333,7 +21333,7 @@ let SpawnService = class SpawnService {
         for (let file of files) {
             fileList += `${file}\n`;
         }
-        console.log(`${fileList} | gsutil -m cp -J -i gs://${bucketName}/${destinationDir}`);
+        console.log(`${fileList} | gsutil -m cp -J -I gs://${bucketName}/${destinationDir}`);
         return new Promise(function (resolve, reject) {
             let rsyncProcess = (0,child_process__WEBPACK_IMPORTED_MODULE_0__.spawn)(`${fileList} | gsutil -m cp -J -i gs://${bucketName}/${destinationDir}`, [], { shell: true, cwd: `${dir}/public` });
             rsyncProcess.stdout.on('data', (data) => {
