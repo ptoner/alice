@@ -21326,21 +21326,38 @@ let SpawnService = class SpawnService {
             });
         });
     }
-    async spawnGoogleCloudCopy(dir, filepath, bucketName, destinationDir) {
-        filepath = filepath.replace("public/", "");
-        return new Promise(function (resolve, reject) {
-            console.log(`gsutil -m cp -J ${filepath} gs://${bucketName}/${destinationDir}/${filepath}`);
-            let rsyncProcess = (0,child_process__WEBPACK_IMPORTED_MODULE_0__.spawn)(`gsutil -m cp -J ${filepath} gs://${bucketName}/${destinationDir}/${filepath}`, [], { shell: true, cwd: `${dir}/public` });
-            rsyncProcess.stdout.on('data', (data) => {
-                process.stdout.write(data.toString());
+    async spawnGoogleCloudCopy(dir, filepaths, bucketName, destinationDir) {
+        let commands = [];
+        for (let filepath of filepaths) {
+            filepath = filepath.replace("public/", "");
+            commands.push(`gsutil -m cp -J ${filepath} gs://${bucketName}/${destinationDir}/${filepath}`);
+        }
+        let chunks = [];
+        const chunkSize = 50;
+        for (let i = 0; i < commands.length; i += chunkSize) {
+            chunks.push(commands.slice(i, i + chunkSize));
+        }
+        const runCommand = async (cmd) => {
+            return new Promise(function (resolve, reject) {
+                let p = (0,child_process__WEBPACK_IMPORTED_MODULE_0__.spawn)(cmd, [], { shell: true, cwd: `${dir}/public` });
+                p.stdout.on('data', (data) => {
+                    process.stdout.write(data.toString());
+                });
+                p.stderr.on('data', (data) => {
+                    process.stderr.write(data.toString());
+                });
+                p.on('close', (code) => {
+                    resolve(p);
+                });
             });
-            rsyncProcess.stderr.on('data', (data) => {
-                process.stderr.write(data.toString());
-            });
-            rsyncProcess.on('close', (code) => {
-                resolve(rsyncProcess);
-            });
-        });
+        };
+        let i = 0;
+        for (let chunk of chunks) {
+            let cmd = chunk.map(command => `${command} &`);
+            cmd = cmd.substring(0, cmd.length - 1);
+            console.log(cmd);
+            await runCommand(cmd);
+        }
     }
 };
 SpawnService = __decorate([
@@ -25587,13 +25604,13 @@ let syncPush = async () => {
             await spawnService.spawnGenerateAndSync(syncDirectory);
         }
         //Push changes to git.
-        const git = (0,simple_git__WEBPACK_IMPORTED_MODULE_4__.simpleGit)(syncDirectory);
-        let status = await git.status();
-        if (!status.isClean()) {
-            await git.add('./');
-            await git.commit('Committing changes');
-            await git.push('origin', status.current);
-        }
+        // const git = simpleGit(syncDirectory)
+        // let status = await git.status()
+        // if (!status.isClean()) {
+        //   await git.add('./')
+        //   await git.commit('Committing changes')
+        //   await git.push('origin', status.current)
+        // }
         //Rsync before starting
         // await spawnService.spawnGoogleCloudSync(syncDirectory, config.deploy.googleCloud.bucketName, path.basename(syncDirectory))
     }
@@ -25613,9 +25630,7 @@ let syncPush = async () => {
                     await git.commit('Committing changes');
                     await git.push('origin', status.current);
                     let changedFiles = [...status.not_added, ...status.created, ...status.deleted, ...status.modified, ...status.staged];
-                    for (let changedFile of changedFiles) {
-                        await spawnService.spawnGoogleCloudCopy(syncDirectory, changedFile, config.deploy.googleCloud.bucketName, path__WEBPACK_IMPORTED_MODULE_3___default().basename(syncDirectory));
-                    }
+                    await spawnService.spawnGoogleCloudCopy(syncDirectory, changedFiles, config.deploy.googleCloud.bucketName, path__WEBPACK_IMPORTED_MODULE_3___default().basename(syncDirectory));
                 }
                 else {
                     console.log(`No changes in ${syncDirectory}`);
