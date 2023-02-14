@@ -22,10 +22,5 @@
         }
     ],
 
-    "headStart": "src/headStart.ejs",
-    "deploy": {
-        "googleCloud": {
-            "bucketName": "read-alice"
-        }
-    }
-}
+    "headStart": "src/headStart.ejs"
+} 
