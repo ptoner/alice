@@ -21331,7 +21331,7 @@ let SpawnService = class SpawnService {
         files = files.map(file => file.replace("public/", ""));
         let fileList = "";
         for (let file of files) {
-            fileList += `${file}\n`;
+            fileList += `${file}\r\n`;
         }
         console.log(`${fileList} | gsutil -m cp -J -I gs://${bucketName}/${destinationDir}`);
         return new Promise(function (resolve, reject) {
