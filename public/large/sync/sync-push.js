@@ -25020,7 +25020,9 @@ let SpawnService = class SpawnService {
             fileList += `./${file}\n`;
         }
         //Write to file to cat to gsutil
+        console.log(1);
         memfs__WEBPACK_IMPORTED_MODULE_1__.fs.writeFileSync(`${dir}/.copyList`, Buffer.from(fileList));
+        console.log(2);
         console.log(`cat ${dir}/.copyList | gsutil -m cp -J -I gs://${bucketName}/${destinationDir}`);
         return new Promise(function (resolve, reject) {
             let rsyncProcess = (0,child_process__WEBPACK_IMPORTED_MODULE_0__.spawn)(`${fileList} | gsutil -m cp -J -i gs://${bucketName}/${destinationDir}`, [], { shell: true, cwd: `${dir}/public` });
