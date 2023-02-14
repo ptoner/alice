@@ -21201,11 +21201,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "SpawnService": () => (/* binding */ SpawnService)
 /* harmony export */ });
-/* harmony import */ var inversify__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! inversify */ "./node_modules/inversify/es/annotation/injectable.js");
+/* harmony import */ var inversify__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! inversify */ "./node_modules/inversify/es/annotation/injectable.js");
 /* harmony import */ var child_process__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! child_process */ "child_process");
 /* harmony import */ var child_process__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(child_process__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var fs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! fs */ "fs");
-/* harmony import */ var fs__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(fs__WEBPACK_IMPORTED_MODULE_1__);
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -21215,7 +21213,6 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-
 
 
 let SpawnService = class SpawnService {
@@ -21336,11 +21333,8 @@ let SpawnService = class SpawnService {
         for (let file of files) {
             fileList += `./${file}\n`;
         }
-        //Write to file to cat to gsutil
-        console.log(1);
-        fs__WEBPACK_IMPORTED_MODULE_1___default().writeFileSync(`${dir}/.copyList`, Buffer.from(fileList));
-        console.log(2);
-        console.log(`cat ${dir}/.copyList | gsutil -m cp -J -I gs://${bucketName}/${destinationDir}`);
+        fileList = fileList.substring(0, fileList.length - 1);
+        console.log(`${fileList} | gsutil -m cp -J -I gs://${bucketName}/${destinationDir}`);
         return new Promise(function (resolve, reject) {
             let rsyncProcess = (0,child_process__WEBPACK_IMPORTED_MODULE_0__.spawn)(`${fileList} | gsutil -m cp -J -i gs://${bucketName}/${destinationDir}`, [], { shell: true, cwd: `${dir}/public` });
             rsyncProcess.stdout.on('data', (data) => {
@@ -21356,7 +21350,7 @@ let SpawnService = class SpawnService {
     }
 };
 SpawnService = __decorate([
-    (0,inversify__WEBPACK_IMPORTED_MODULE_2__.injectable)(),
+    (0,inversify__WEBPACK_IMPORTED_MODULE_1__.injectable)(),
     __metadata("design:paramtypes", [])
 ], SpawnService);
 
