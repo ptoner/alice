@@ -21329,7 +21329,7 @@ let SpawnService = class SpawnService {
     async spawnGoogleCloudCopy(dir, filepath, bucketName, destinationDir) {
         filepath = filepath.replace("public/", "");
         return new Promise(function (resolve, reject) {
-            let rsyncProcess = (0,child_process__WEBPACK_IMPORTED_MODULE_0__.spawn)(`gsutil -m cp -J -i gs://${bucketName}/${destinationDir}/${filepath}`, [], { shell: true, cwd: `${dir}/public` });
+            let rsyncProcess = (0,child_process__WEBPACK_IMPORTED_MODULE_0__.spawn)(`gsutil -m cp -J gs://${bucketName}/${destinationDir}/${filepath}`, [], { shell: true, cwd: `${dir}/public` });
             rsyncProcess.stdout.on('data', (data) => {
                 process.stdout.write(data.toString());
             });
