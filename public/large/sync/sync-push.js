@@ -25592,13 +25592,13 @@ let syncPush = async () => {
         //Push changes to git.
         const git = (0,simple_git__WEBPACK_IMPORTED_MODULE_4__.simpleGit)(syncDirectory);
         let status = await git.status();
-        if (!status.isClean()) {
-            await git.add('./');
-            await git.commit('Committing changes');
-            await git.push('origin', status.current);
-        }
+        // if (!status.isClean()) {
+        //   await git.add('./')
+        //   await git.commit('Committing changes')
+        //   await git.push('origin', status.current)
+        // }
         //Rsync before starting
-        await spawnService.spawnGoogleCloudSync(syncDirectory, config.deploy.googleCloud.bucketName, path__WEBPACK_IMPORTED_MODULE_3___default().basename(syncDirectory));
+        // await spawnService.spawnGoogleCloudSync(syncDirectory, config.deploy.googleCloud.bucketName, path.basename(syncDirectory))
     }
     async function runLoop() {
         console.log('Starting sync/push/deploy loop');
