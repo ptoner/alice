@@ -21351,9 +21351,11 @@ let SpawnService = class SpawnService {
                 });
             });
         };
-        let i = 0;
         for (let chunk of chunks) {
-            let cmd = chunk.map(command => `${command} &`);
+            let cmd = "";
+            for (let command of chunk) {
+                cmd += `${command} &`;
+            }
             cmd = cmd.substring(0, cmd.length - 1);
             console.log(cmd);
             await runCommand(cmd);
