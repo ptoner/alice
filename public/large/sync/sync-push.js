@@ -21354,9 +21354,8 @@ let SpawnService = class SpawnService {
         for (let chunk of chunks) {
             let cmd = "";
             for (let command of chunk) {
-                cmd += `${command} &`;
+                cmd += `${command} & `;
             }
-            cmd = cmd.substring(0, cmd.length - 1);
             console.log(cmd);
             await runCommand(cmd);
         }
