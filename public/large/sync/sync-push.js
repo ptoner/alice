@@ -21333,7 +21333,7 @@ let SpawnService = class SpawnService {
             commands.push(`gsutil -m cp -J ${filepath} gs://${bucketName}/${destinationDir}/${filepath}`);
         }
         let chunks = [];
-        const chunkSize = 50;
+        const chunkSize = 100;
         for (let i = 0; i < commands.length; i += chunkSize) {
             chunks.push(commands.slice(i, i + chunkSize));
         }
@@ -21356,7 +21356,6 @@ let SpawnService = class SpawnService {
             for (let command of chunk) {
                 cmd += `${command} & `;
             }
-            console.log(cmd);
             await runCommand(cmd);
         }
     }
@@ -25605,15 +25604,15 @@ let syncPush = async () => {
             await spawnService.spawnGenerateAndSync(syncDirectory);
         }
         //Push changes to git.
-        // const git = simpleGit(syncDirectory)
-        // let status = await git.status()
-        // if (!status.isClean()) {
-        //   await git.add('./')
-        //   await git.commit('Committing changes')
-        //   await git.push('origin', status.current)
-        // }
-        //Rsync before starting
-        // await spawnService.spawnGoogleCloudSync(syncDirectory, config.deploy.googleCloud.bucketName, path.basename(syncDirectory))
+        const git = (0,simple_git__WEBPACK_IMPORTED_MODULE_4__.simpleGit)(syncDirectory);
+        let status = await git.status();
+        if (!status.isClean()) {
+            await git.add('./');
+            await git.commit('Committing changes');
+            await git.push('origin', status.current);
+        }
+        //sync before starting
+        await spawnService.spawnGoogleCloudSync(syncDirectory, config.deploy.googleCloud.bucketName, path__WEBPACK_IMPORTED_MODULE_3___default().basename(syncDirectory));
     }
     async function runLoop() {
         console.log('Starting sync/push/deploy loop');
