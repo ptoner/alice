@@ -21326,17 +21326,10 @@ let SpawnService = class SpawnService {
             });
         });
     }
-    async spawnGoogleCloudCopy(dir, files, bucketName, destinationDir) {
-        //Drop public from the file names
-        // files = files.map(file => file.replace("public/", ""))
-        let fileList = "";
-        for (let file of files) {
-            fileList += `${dir}/${file}\n`;
-        }
-        fileList = fileList.substring(0, fileList.length - 1);
-        console.log(`${fileList} | gsutil -m cp -J -i gs://${bucketName}/${destinationDir}`);
+    async spawnGoogleCloudCopy(dir, filepath, bucketName, destinationDir) {
+        filepath = filepath.replace("public/", "");
         return new Promise(function (resolve, reject) {
-            let rsyncProcess = (0,child_process__WEBPACK_IMPORTED_MODULE_0__.spawn)(`${fileList} | gsutil -m cp -J -i gs://${bucketName}/${destinationDir}`, [], { shell: true, cwd: `${dir}/public` });
+            let rsyncProcess = (0,child_process__WEBPACK_IMPORTED_MODULE_0__.spawn)(`gsutil -m cp -J -i gs://${bucketName}/${destinationDir}/${filepath}`, [], { shell: true, cwd: `${dir}/public` });
             rsyncProcess.stdout.on('data', (data) => {
                 process.stdout.write(data.toString());
             });
@@ -25590,18 +25583,18 @@ let syncPush = async () => {
     for (let repo of config.repos) {
         const syncDirectory = path__WEBPACK_IMPORTED_MODULE_3___default().resolve(config.baseDir, repo);
         if (config.generate) {
-            await spawnService.spawnGenerate(syncDirectory);
+            await spawnService.spawnGenerateAndSync(syncDirectory);
         }
         //Push changes to git.
         const git = (0,simple_git__WEBPACK_IMPORTED_MODULE_4__.simpleGit)(syncDirectory);
         let status = await git.status();
-        // if (!status.isClean()) {
-        //   await git.add('./')
-        //   await git.commit('Committing changes')
-        //   await git.push('origin', status.current)
-        // }
+        if (!status.isClean()) {
+            await git.add('./');
+            await git.commit('Committing changes');
+            await git.push('origin', status.current);
+        }
         //Rsync before starting
-        // await spawnService.spawnGoogleCloudSync(syncDirectory, config.deploy.googleCloud.bucketName, path.basename(syncDirectory))
+        await spawnService.spawnGoogleCloudSync(syncDirectory, config.deploy.googleCloud.bucketName, path__WEBPACK_IMPORTED_MODULE_3___default().basename(syncDirectory));
     }
     async function runLoop() {
         console.log('Starting sync/push/deploy loop');
@@ -25619,8 +25612,8 @@ let syncPush = async () => {
                     await git.commit('Committing changes');
                     await git.push('origin', status.current);
                     let changedFiles = [...status.not_added, ...status.created, ...status.deleted, ...status.modified, ...status.staged];
-                    if (changedFiles.length > 0) {
-                        await spawnService.spawnGoogleCloudCopy(syncDirectory, changedFiles, config.deploy.googleCloud.bucketName, path__WEBPACK_IMPORTED_MODULE_3___default().basename(syncDirectory));
+                    for (let changedFile of changedFiles) {
+                        await spawnService.spawnGoogleCloudCopy(syncDirectory, changedFile, config.deploy.googleCloud.bucketName, path__WEBPACK_IMPORTED_MODULE_3___default().basename(syncDirectory));
                     }
                 }
                 else {
