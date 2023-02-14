@@ -21331,8 +21331,9 @@ let SpawnService = class SpawnService {
         files = files.map(file => file.replace("public/", ""));
         let fileList = "";
         for (let file of files) {
-            fileList += `./${file}\r\n`;
+            fileList += `./${file}\n`;
         }
+        fileList = fileList.substring(0, fileList.length - 2);
         console.log(`${fileList} | gsutil -m cp -J -I gs://${bucketName}/${destinationDir}`);
         return new Promise(function (resolve, reject) {
             let rsyncProcess = (0,child_process__WEBPACK_IMPORTED_MODULE_0__.spawn)(`${fileList} | gsutil -m cp -J -i gs://${bucketName}/${destinationDir}`, [], { shell: true, cwd: `${dir}/public` });
@@ -25618,7 +25619,9 @@ let syncPush = async () => {
                     await git.commit('Committing changes');
                     await git.push('origin', status.current);
                     let changedFiles = [...status.not_added, ...status.created, ...status.deleted, ...status.modified, ...status.staged];
-                    await spawnService.spawnGoogleCloudCopy(syncDirectory, changedFiles, config.deploy.googleCloud.bucketName, path__WEBPACK_IMPORTED_MODULE_3___default().basename(syncDirectory));
+                    if (changedFiles.length > 0) {
+                        await spawnService.spawnGoogleCloudCopy(syncDirectory, changedFiles, config.deploy.googleCloud.bucketName, path__WEBPACK_IMPORTED_MODULE_3___default().basename(syncDirectory));
+                    }
                 }
                 else {
                     console.log(`No changes in ${syncDirectory}`);
