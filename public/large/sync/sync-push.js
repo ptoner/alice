@@ -21331,10 +21331,11 @@ let SpawnService = class SpawnService {
         files = files.map(file => file.replace("public/", ""));
         let fileList = "";
         for (let file of files) {
-            fileList += `./${file}\n`;
+            fileList += `${file}\n`;
         }
         fileList = fileList.substring(0, fileList.length - 1);
-        console.log(`${fileList} | gsutil -m cp -J -I gs://${bucketName}/${destinationDir}`);
+        console.log(dir);
+        console.log(`${fileList} | gsutil -m cp -J -i gs://${bucketName}/${destinationDir}`);
         return new Promise(function (resolve, reject) {
             let rsyncProcess = (0,child_process__WEBPACK_IMPORTED_MODULE_0__.spawn)(`${fileList} | gsutil -m cp -J -i gs://${bucketName}/${destinationDir}`, [], { shell: true, cwd: `${dir}/public` });
             rsyncProcess.stdout.on('data', (data) => {
