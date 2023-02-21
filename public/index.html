@@ -33,14 +33,14 @@
     <meta property="og:title" content="Alice&#39;s Adventures in Wonderland" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="/index.html" />
-    <meta property="og:image" content="http://localhost:8081/backup/export/images/QmeL8dxWDhVAMA4o4PDzMiF6C8avTuQnkHDGbvoNZszxLS.jpg" />
+    <meta property="og:image" content="https://readalice.com/backup/export/images/QmeL8dxWDhVAMA4o4PDzMiF6C8avTuQnkHDGbvoNZszxLS.jpg" />
     <meta property="og:description" content="The most copied art project of all time!Okay, so you&amp;#x27;re thinking, &amp;#x22;Do I really want to read a book that&amp;#x27;s over a hundred years old? Isn&amp;#x27;t it going to be kind of boring?&amp;#x22; Well, I&amp;#x27;m here to tell you that Alice&amp;#x27;s Adventures in Wonderland is not your average, stuffy old book. It&amp;#x27;s actually a pretty wild ride. Alice is a normal girl who falls asleep in a meadow and tumbles down a giant rabbit hole. She winds up in a place called Wonderland, which is full of all sorts of strange and wonderful&amp;#x2026;" />
 
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:url" content="/index.html" />
     <meta property="twitter:title" content="Alice&#39;s Adventures in Wonderland" />
     <meta property="twitter:description" content="The most copied art project of all time!Okay, so you&amp;#x27;re thinking, &amp;#x22;Do I really want to read a book that&amp;#x27;s over a hundred years old? Isn&amp;#x27;t it going to be kind of boring?&amp;#x22; Well, I&amp;#x27;m here to tell you that Alice&amp;#x27;s Adventures in Wonderland is not your average, stuffy old book. It&amp;#x27;s actually a pretty wild ride. Alice is a normal girl who falls asleep in a meadow and tumbles down a giant rabbit hole. She winds up in a place called Wonderland, which is full of all sorts of strange and wonderful&amp;#x2026;" />
-    <meta property="twitter:image" content="http://localhost:8081/backup/export/images/QmeL8dxWDhVAMA4o4PDzMiF6C8avTuQnkHDGbvoNZszxLS.jpg" />
+    <meta property="twitter:image" content="https://readalice.com/backup/export/images/QmeL8dxWDhVAMA4o4PDzMiF6C8avTuQnkHDGbvoNZszxLS.jpg" />
 
     
         <script defer src="/large/reader/browser/js/runtime.reader.js"></script>
@@ -123,41 +123,45 @@
                 <div class="block block-strong inset stats">
   
                   <div class="row">
-                    <div class="col-100 large-33 margin-bottom">
+                    <div class="col-50 large-33 margin-bottom">
                       Average Sale<br />
                       <strong>${new Intl.NumberFormat('en-US').format(salesReport?.totals?.averageEthValue ? salesReport?.totals?.averageEthValue : 0)} ETH (${transactionWebService.abbreviateDollars(salesReport?.totals?.averageUsdValue ? salesReport?.totals?.averageUsdValue : 0, 2)})</strong>
                     </div>
-                    <div class="col-100 large-33 margin-bottom">
+                    <div class="col-50 large-33 margin-bottom">
                       Number of Sales (Lifetime)<br />
                       <strong>${new Intl.NumberFormat('en-US').format(salesReport?.totals?.events ? salesReport?.totals?.events : 0)}</strong>
                     </div>
-                    <div class="col-100 large-33 margin-bottom">
+                    <div class="col-50 large-33 margin-bottom">
                       Total Value of All Sales (Lifetime)<br />
                       <strong>${new Intl.NumberFormat('en-US').format(salesReport?.totals?.ethValue ? salesReport?.totals?.ethValue : 0)} ETH (${transactionWebService.abbreviateDollars(salesReport?.totals?.usdValue ? salesReport?.totals?.usdValue : 0, 2)})</strong>
                     </div>
                   </div>
   
                   <div class="row margin-top">
-                    <div class="col-100 large-33 margin-bottom">
+
+                    <div class="col-50 large-33 margin-bottom">
                       Value of Sales (24 Hours)<br />
                       <strong>${new Intl.NumberFormat('en-US').format(salesReport?.dayTotals?.ethValue ? salesReport?.dayTotals?.ethValue : 0)} ETH (${transactionWebService.abbreviateDollars(salesReport?.dayTotals?.usdValue ? salesReport?.dayTotals?.usdValue?.toFixed(2) : 0, 2)})</strong>
                     </div>
-                    <div class="col-100 large-33 margin-bottom">
+
+                    <div class="col-50 large-33 margin-bottom">
                       Value of Sales (Month)<br />
                       <strong>${new Intl.NumberFormat('en-US').format(salesReport?.monthTotals?.ethValue ? salesReport?.monthTotals?.ethValue : 0)} ETH (${transactionWebService.abbreviateDollars(salesReport?.monthTotals?.usdValue ? salesReport?.monthTotals?.usdValue?.toFixed(2) : 0, 2)})</strong>
                     </div>
-                    <div class="col-100 large-33 margin-bottom">
+
+                    <div class="col-50 large-33 margin-bottom">
                       Value of Sales (Year)<br />
                       <strong>${new Intl.NumberFormat('en-US').format(salesReport?.yearTotals?.ethValue ? salesReport?.yearTotals?.ethValue : 0)} ETH (${transactionWebService.abbreviateDollars(salesReport?.yearTotals?.usdValue ? salesReport?.yearTotals?.usdValue?.toFixed(2) : 0, 2)})</strong>
                     </div>
+
                   </div>
   
                   <div class="row margin-top">
                     <div class="col-100 large-50">
-                      <a class="button button-outline" href="${link('leaderboard')}">Top Owners</a>
+                      <a class="button button-outline margin-bottom" href="${link('leaderboard')}">Top Owners</a>
                     </div>
                     <div class="col-100 large-50">
-                      <a class="button button-outline" href="${link('attributes')}">All Attributes</a>
+                      <a class="button button-outline margin-bottom" href="${link('attributes')}">All Attributes</a>
                     </div>
                   </div>
 
@@ -466,12 +470,12 @@
 
             document.querySelector('meta[property="og:title"]').setAttribute("content", "Alice&#39;s Adventures in Wonderland")
             document.querySelector('meta[property="og:url"]').setAttribute("content", "/index.html")
-            document.querySelector('meta[property="og:image"]').setAttribute("content", "http://localhost:8081/backup/export/images/QmeL8dxWDhVAMA4o4PDzMiF6C8avTuQnkHDGbvoNZszxLS.jpg")
+            document.querySelector('meta[property="og:image"]').setAttribute("content", "https://readalice.com/backup/export/images/QmeL8dxWDhVAMA4o4PDzMiF6C8avTuQnkHDGbvoNZszxLS.jpg")
             document.querySelector('meta[property="og:description"]').setAttribute("content", "The most copied art project of all time!Okay, so you&amp;#x27;re thinking, &amp;#x22;Do I really want to read a book that&amp;#x27;s over a hundred years old? Isn&amp;#x27;t it going to be kind of boring?&amp;#x22; Well, I&amp;#x27;m here to tell you that Alice&amp;#x27;s Adventures in Wonderland is not your average, stuffy old book. It&amp;#x27;s actually a pretty wild ride. Alice is a normal girl who falls asleep in a meadow and tumbles down a giant rabbit hole. She winds up in a place called Wonderland, which is full of all sorts of strange and wonderful&amp;#x2026;")
 
             document.querySelector('meta[property="twitter:url"]').setAttribute("content", "/index.html")
             document.querySelector('meta[property="twitter:title"]').setAttribute("content", "Alice&#39;s Adventures in Wonderland")
-            document.querySelector('meta[property="twitter:image"]').setAttribute("content", "http://localhost:8081/backup/export/images/QmeL8dxWDhVAMA4o4PDzMiF6C8avTuQnkHDGbvoNZszxLS.jpg")
+            document.querySelector('meta[property="twitter:image"]').setAttribute("content", "https://readalice.com/backup/export/images/QmeL8dxWDhVAMA4o4PDzMiF6C8avTuQnkHDGbvoNZszxLS.jpg")
             document.querySelector('meta[property="twitter:description"]').setAttribute("content", "The most copied art project of all time!Okay, so you&amp;#x27;re thinking, &amp;#x22;Do I really want to read a book that&amp;#x27;s over a hundred years old? Isn&amp;#x27;t it going to be kind of boring?&amp;#x22; Well, I&amp;#x27;m here to tell you that Alice&amp;#x27;s Adventures in Wonderland is not your average, stuffy old book. It&amp;#x27;s actually a pretty wild ride. Alice is a normal girl who falls asleep in a meadow and tumbles down a giant rabbit hole. She winds up in a place called Wonderland, which is full of all sorts of strange and wonderful&amp;#x2026;" )
 
             document.querySelector('title').innerHTML = "Alice&#39;s Adventures in Wonderland"
@@ -491,9 +495,9 @@
     <script type="module" id="page-scripts">
 
       let baseURL = '/'
-      let hostname = 'http://localhost:8081'
+      let hostname = 'https://readalice.com'
       let channelId = '411f8c34-31d3-4dcb-9139-2f7334377c66'
-      let version = atob('IjAuNS4yMiI=').replace('"', '').replace('"', '')
+      let version = atob('IjAuNS4yMyI=').replace('"', '').replace('"', '')
 
       let routablePages = JSON.parse(`[{"name":"About","locations":["links"],"channelId":"411f8c34-31d3-4dcb-9139-2f7334377c66","slug":"about","dateCreated":"2022-07-12T21:24:16.486Z","_id":"95d31c41-430e-4b92-92b2-4605b05c9e7a"}]`)
 

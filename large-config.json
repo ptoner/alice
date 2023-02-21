@@ -1,5 +1,11 @@
 {
-    "hostname": "http://readalice.com",
+    "env": {
+        "dev": {
+            "hostname": "http://localhost"
+        }
+    },
+    
+    "hostname": "https://readalice.com",
     "showMintPage": true,
     "showActivityPage": true,
     "marketplaces": [
