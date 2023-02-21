@@ -34,19 +34,19 @@
     <meta property="og:title" content="Leaderboard for Alice&#39;s Adventures in Wonderland" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="/leaderboard" />
-    <meta property="og:image" content="http://localhost:8081/backup/export/images/QmeL8dxWDhVAMA4o4PDzMiF6C8avTuQnkHDGbvoNZszxLS.jpg" />
+    <meta property="og:image" content="https://readalice.com/backup/export/images/QmeL8dxWDhVAMA4o4PDzMiF6C8avTuQnkHDGbvoNZszxLS.jpg" />
     <meta property="og:description" content="Leaderboard for Alice&#39;s Adventures in Wonderland" />
 
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:url" content="/leaderboard" />
     <meta property="twitter:title" content="Leaderboard for Alice&#39;s Adventures in Wonderland" />
     <meta property="twitter:description" content="Leaderboard for Alice&#39;s Adventures in Wonderland" />
-    <meta property="twitter:image" content="http://localhost:8081/backup/export/images/QmeL8dxWDhVAMA4o4PDzMiF6C8avTuQnkHDGbvoNZszxLS.jpg" />
+    <meta property="twitter:image" content="https://readalice.com/backup/export/images/QmeL8dxWDhVAMA4o4PDzMiF6C8avTuQnkHDGbvoNZszxLS.jpg" />
 
     
-        <script defer src="/large/reader/browser/js/runtime.reader.js"></script>
-        <script defer src="/large/reader/browser/js/vendors.reader.js"></script>
-        <script defer src="/large/reader/browser/js/main.reader.js"></script>
+  <script defer src="/large/reader/browser/js/runtime.reader.js"></script>
+  <script defer src="/large/reader/browser/js/vendors.reader.js"></script>
+  <script defer src="/large/reader/browser/js/main.reader.js"></script>
         
 </head>
 
@@ -92,22 +92,22 @@
                                     </div>
                                 </div>
                             
-                                <div class="card">
+                                <div class="card data-table">
                                     <div class="card-header">
                                         Leaderboard <span class="last-updated">Last updated: ${moment(lastUpdated).fromNow()}</span>
 
                                     </div>
-                                    <div class="card-content data-table">
+                                    <div class="card-content">
                                         
                                         <table class="leaderboard-table">
                                             <thead>
                                                 <tr>
-                                                    <th class="numeric-cell">Rank</th>
-                                                    <th class="label-cell">Address</th>
-                                                    <th>Last Active</th>
+                                                    <th class="label-cell">Rank</th>
+                                                    <th class="address-cell">Address</th>
                                                     <th class="numeric-cell">Owned</th>
                                                     <th class="numeric-cell">Buys</th>
                                                     <th class="numeric-cell">Sales</th>
+                                                    <th class="text-cell">Last Active</th>
 
                                                 </tr>
                                             </thead>
@@ -116,11 +116,11 @@
                                     
                                             ${tokenOwners?.map(u => $h`
                                                 <tr>
-                                                    <td class="numeric-cell">
+                                                    <td class="label-cell">
                                                         ${u.rank}
                                                     </td>
 
-                                                    <td class="label-cell">
+                                                    <td class="address-cell">
 
                                                         ${u.ensName ? $h`
                                                             <a href="/u/?address=${u._id}">${u.ensName}</a>
@@ -129,10 +129,7 @@
                                                         `} 
 
                                                     </td>
-                                        
-                                                    <td>
-                                                        ${u.lastActive ? moment(u.lastActive).fromNow() : ""}
-                                                    </td>
+                                    
                                         
                                                     <td class="numeric-cell">
                                                         ${u.count}
@@ -147,6 +144,11 @@
                                                         <strong>${new Intl.NumberFormat('en-US').format(u.salesReport?.sales?.ethValue ? u.salesReport?.sales?.ethValue : 0)}</strong> ETH <br />
                                                         ${transactionWebService.abbreviateDollars(u.salesReport?.sales?.usdValue ? u.salesReport?.sales?.usdValue : 0, 2)}
                                                     </td>
+
+                                                    <td class="text-cell">
+                                                        ${u.lastActive ? moment(u.lastActive).fromNow() : ""}
+                                                    </td>
+
 
                                                 </tr>
                                             
@@ -294,12 +296,12 @@
 
             document.querySelector('meta[property="og:title"]').setAttribute("content", "Leaderboard for Alice&#39;s Adventures in Wonderland")
             document.querySelector('meta[property="og:url"]').setAttribute("content", "/leaderboard")
-            document.querySelector('meta[property="og:image"]').setAttribute("content", "http://localhost:8081/backup/export/images/QmeL8dxWDhVAMA4o4PDzMiF6C8avTuQnkHDGbvoNZszxLS.jpg")
+            document.querySelector('meta[property="og:image"]').setAttribute("content", "https://readalice.com/backup/export/images/QmeL8dxWDhVAMA4o4PDzMiF6C8avTuQnkHDGbvoNZszxLS.jpg")
             document.querySelector('meta[property="og:description"]').setAttribute("content", "Leaderboard for Alice&#39;s Adventures in Wonderland")
 
             document.querySelector('meta[property="twitter:url"]').setAttribute("content", "/leaderboard")
             document.querySelector('meta[property="twitter:title"]').setAttribute("content", "Leaderboard Alice&#39;s Adventures in Wonderland")
-            document.querySelector('meta[property="twitter:image"]').setAttribute("content", "http://localhost:8081/backup/export/images/QmeL8dxWDhVAMA4o4PDzMiF6C8avTuQnkHDGbvoNZszxLS.jpg")
+            document.querySelector('meta[property="twitter:image"]').setAttribute("content", "https://readalice.com/backup/export/images/QmeL8dxWDhVAMA4o4PDzMiF6C8avTuQnkHDGbvoNZszxLS.jpg")
             document.querySelector('meta[property="twitter:description"]').setAttribute("content", "Leaderboard for Alice&#39;s Adventures in Wonderland" )
 
             document.querySelector('title').innerHTML = "Leaderboard Alice&#39;s Adventures in Wonderland"
@@ -316,9 +318,9 @@
     <script type="module" id="page-scripts">
 
         let baseURL = '/'
-        let hostname = 'http://localhost:8081'
+        let hostname = 'https://readalice.com'
         let channelId = '411f8c34-31d3-4dcb-9139-2f7334377c66'
-        let version = atob('IjAuNS4yMSI=').replace('"', '').replace('"', '')
+        let version = atob('IjAuNS4yMyI=').replace('"', '').replace('"', '')
 
         let routablePages = JSON.parse(`[{"name":"About","locations":["links"],"channelId":"411f8c34-31d3-4dcb-9139-2f7334377c66","slug":"about","dateCreated":"2022-07-12T21:24:16.486Z","_id":"95d31c41-430e-4b92-92b2-4605b05c9e7a"}]`)
 
