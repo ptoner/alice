@@ -25601,7 +25601,7 @@ let syncPush = async () => {
         throw new Error("No repositories configured.");
     }
     let spawnService = new _service_spawn_service_js__WEBPACK_IMPORTED_MODULE_6__.SpawnService();
-    console.log('Starting Sync/Push...');
+    console.log(`Starting Sync/Push to env: ${config.env}`);
     for (let reader of config.readers) {
         const syncDirectory = path__WEBPACK_IMPORTED_MODULE_3___default().resolve(config.syncDir, reader.repo);
         if (config.generate) {
