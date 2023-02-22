@@ -379,8 +379,10 @@
 
                 const viewPortWidth = getWidth()
 
-                virtualList?.params?.cols = viewPortWidth >= 1024 ? 5 : 2
-                virtualList?.update()
+                if (virtualList) {
+                    virtualList.params.cols = viewPortWidth >= 1024 ? 5 : 2
+                    virtualList?.update()
+                }
 
                 console.log("Resized...")
 
@@ -453,18 +455,6 @@
 
 
             }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
