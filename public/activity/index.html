@@ -226,7 +226,11 @@
                         previousPage = page - 1
                     } 
 
-                    nextPage = page + 1
+                    if (page <= 10) {
+                        nextPage = page + 1
+                    } else {
+                        nextPage = undefined //don't go past page 10
+                    }
 
 
 
@@ -234,7 +238,7 @@
                         transactionsViewModel = await transactionWebService.list(page)
 
                         if (transactionsViewModel.transactions?.length < display) {
-                            delete previousPage
+                            previousPage = undefined
                         }
 
                     } catch(ex) {   }
