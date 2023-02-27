@@ -369,8 +369,8 @@
                                 
                                     </div>
                                 
-
-                                    
+                                    <div class="large-75 col-100">
+                                        
 <div class="block block-strong inset">
 
     <span class="footer-link">
@@ -391,6 +391,7 @@
 
 </div>
           
+                                    </div>
 
 
                                 </div>
@@ -504,13 +505,22 @@
 
                 try  {
 
-                    transactionsViewModel = await transactionWebService.listByTokenFrom("263", 1000)
+
+                    // transactionsViewModel = await transactionWebService.listByTokenFrom("263", 1000)
 
                     // //Last updated won't be right because this only gets written when it actually changes.
                     // let latest = await transactionWebService.getLatest()
                     // transactionsViewModel.lastUpdated = latest.lastUpdated
 
                     token = await tokenService.get("263")
+
+
+                    transactionsViewModel = token.transactionsViewModel
+
+                    await transactionWebService.cacheENSNames(transactionsViewModel)
+
+                    //Reverse order
+                    transactionsViewModel?.transactions?.reverse()
 
 
                 } catch(ex) { console.log(ex) }
@@ -596,7 +606,7 @@
         let baseURL = '/'
         let hostname = 'https://readalice.com'
         let channelId = '411f8c34-31d3-4dcb-9139-2f7334377c66'
-        let version = atob('IjAuNS4yNCI=').replace('"', '').replace('"', '')
+        let version = atob('IjAuNi4zIg==').replace('"', '').replace('"', '')
 
         let routablePages = JSON.parse(`[{"name":"About","locations":["links"],"channelId":"411f8c34-31d3-4dcb-9139-2f7334377c66","slug":"about","dateCreated":"2022-07-12T21:24:16.486Z","_id":"95d31c41-430e-4b92-92b2-4605b05c9e7a"}]`)
 
