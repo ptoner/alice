@@ -199,8 +199,8 @@
                                     </div>
                                 </div>
 
-                                <div class="block-title block-title-medium">All Tokens</div>
-                                <div class="list cards-list virtual-list" id="attribute-tokens-list">
+                                <div class="block-title block-title-medium">All Tokens (${totalTokens})</div>
+                                <div class="block list cards-list virtual-list" id="attribute-tokens-list">
                                     <ul class="item-flex"></ul>
                                 </div>
                               
@@ -281,7 +281,7 @@
 
             let virtualList
 
-            let PER_PAGE = 35
+            let page = 1
 
             let hasMoreItems = true
             let loadingInProgress = false
@@ -310,18 +310,19 @@
 
                     salesReport = await transactionWebService.getAttributeSalesReport(traitType, value)
 
+
                     largestSales = salesReport?.largestSalesViewModels
                     owners = salesReport?.owners
 
                     let latest = await transactionWebService.getLatest()
                     lastUpdated = latest.lastUpdated
-    
 
 
                     attributeParams[traitType] = value
 
 
-                    let result = await itemWebService.exploreList(attributeParams, 0, PER_PAGE)
+                    let result = await itemWebService.attributeItemPage(traitType, value, page)
+
                     firstPageItems = result.items
                     totalTokens = result.totalMatches
 
@@ -432,7 +433,13 @@
 
                 try {
                     
-                    let result = await itemWebService.exploreList(attributeParams, virtualList.items?.length, PER_PAGE)
+                    page++
+
+                    let result = await itemWebService.attributeItemPage(traitType, value, page)
+
+                    // firstPageItems = result.items
+
+                    // let result = await itemWebService.exploreList(attributeParams, virtualList.items?.length, PER_PAGE)
 
 
                     let items = result.items
@@ -519,7 +526,7 @@
         let baseURL = '/'
         let hostname = 'https://readalice.com'
         let channelId = '411f8c34-31d3-4dcb-9139-2f7334377c66'
-        let version = atob('IjAuNi4zIg==').replace('"', '').replace('"', '')
+        let version = atob('IjAuNi41Ig==').replace('"', '').replace('"', '')
 
         let routablePages = JSON.parse(`[{"name":"About","locations":["links"],"channelId":"411f8c34-31d3-4dcb-9139-2f7334377c66","slug":"about","dateCreated":"2022-07-12T21:24:16.486Z","_id":"95d31c41-430e-4b92-92b2-4605b05c9e7a"}]`)
 
