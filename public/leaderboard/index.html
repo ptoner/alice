@@ -1,0 +1,335 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-P3HBBWJ4X4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-P3HBBWJ4X4');
+</script>
+
+    <style>
+    html {
+        visibility: hidden;
+        opacity: 0;
+    }
+    </style>
+
+    <!-- Required meta tags-->
+    <meta charset="utf-8">
+    <meta name="viewport"
+    content="width=device-width, initial-scale=1, maximum-scale=5, minimum-scale=1, user-scalable=yes, minimal-ui, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <!-- Color theme for statusbar -->
+    <title>
+        Leaderboard for Alice&#39;s Adventures in Wonderland    </title>
+
+    <meta property="og:title" content="Leaderboard for Alice&#39;s Adventures in Wonderland" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="/leaderboard" />
+    <meta property="og:image" content="https://readalice.com/backup/export/images/QmeL8dxWDhVAMA4o4PDzMiF6C8avTuQnkHDGbvoNZszxLS.jpg" />
+    <meta property="og:description" content="Leaderboard for Alice&#39;s Adventures in Wonderland" />
+
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="/leaderboard" />
+    <meta property="twitter:title" content="Leaderboard for Alice&#39;s Adventures in Wonderland" />
+    <meta property="twitter:description" content="Leaderboard for Alice&#39;s Adventures in Wonderland" />
+    <meta property="twitter:image" content="https://readalice.com/backup/export/images/QmeL8dxWDhVAMA4o4PDzMiF6C8avTuQnkHDGbvoNZszxLS.jpg" />
+
+    
+  <script defer src="/large/reader/browser/js/runtime.reader.js"></script>
+  <script defer src="/large/reader/browser/js/vendors.reader.js"></script>
+  <script defer src="/large/reader/browser/js/main.reader.js"></script>
+        
+</head>
+
+<body>
+
+    <div id="app">
+
+        <div class="view view-main">
+
+            <div class="page" data-name="leaderboard">
+
+                <nav-bar
+                    logo="/backup/export/images/QmeL8dxWDhVAMA4o4PDzMiF6C8avTuQnkHDGbvoNZszxLS.jpg"
+                    title="Leaderboard"
+                    active="Leaderboard"
+                    show_mint_page="true"
+                    show_activity_page="true"
+                >
+                </nav-bar>
+
+
+                <div class="page-content infinite-scroll-content" id="explore-infinite-scroll">
+
+                    <div class="row">
+            
+                        <div class="fixed-width-content center">
+                            
+                            <div class="hidden-on-load">
+                                <div class="block block-strong inset col-100 no-margin-bottom">
+                                    <div class="breadcrumbs ">
+                                      <div class="breadcrumbs-item">
+                                        <a href="/index.html" class="link">
+                                          Home
+                                        </a>
+                                      </div>       
+                                      <div class="breadcrumbs-separator"></div>
+                                      <div class="breadcrumbs-item breadcrumbs-item-active">
+                                        <a href="/leaderboard" class="link">
+                                            Leaderboard
+                                        </a>
+                                        
+                                      </div> 
+                                    </div>
+                                </div>
+                            
+                                <div class="card data-table">
+                                    <div class="card-header">
+                                        Leaderboard <span class="last-updated">Last updated: ${moment(lastUpdated).fromNow()}</span>
+
+                                    </div>
+                                    <div class="card-content">
+                                        
+                                        <table class="leaderboard-table">
+                                            <thead>
+                                                <tr>
+                                                    <th class="label-cell">Rank</th>
+                                                    <th class="address-cell">Address</th>
+                                                    <th class="numeric-cell">Owned</th>
+                                                    <th class="numeric-cell">Buys</th>
+                                                    <th class="numeric-cell">Sales</th>
+                                                    <th class="text-cell">Last Active</th>
+
+                                                </tr>
+                                            </thead>
+                                    
+                                            <tbody>
+                                    
+                                            ${tokenOwners?.map(u => $h`
+                                                <tr>
+                                                    <td class="label-cell">
+                                                        ${u.rank}
+                                                    </td>
+
+                                                    <td class="address-cell">
+
+                                                        ${u.ensName ? $h`
+                                                            <a href="/u/?address=${u._id}">${u.ensName}</a>
+                                                        ` : $h`
+                                                            <a href="/u/?address=${u._id}">${u._id ? walletService.truncateEthAddress(u._id) : ' '}</a>
+                                                        `} 
+
+                                                    </td>
+                                    
+                                        
+                                                    <td class="numeric-cell">
+                                                        ${u.count}
+                                                    </td>
+                                        
+                                                    <td class="numeric-cell">
+                                                        <strong>${new Intl.NumberFormat('en-US').format(u.salesReport?.buys?.ethValue ? u.salesReport?.buys?.ethValue : 0)}</strong> ETH <br />
+                                                        ${transactionWebService.abbreviateDollars(u.salesReport?.buys?.usdValue ? u.salesReport?.buys?.usdValue : 0, 2)}
+                                                    </td>
+                                  
+                                                    <td class="numeric-cell">
+                                                        <strong>${new Intl.NumberFormat('en-US').format(u.salesReport?.sales?.ethValue ? u.salesReport?.sales?.ethValue : 0)}</strong> ETH <br />
+                                                        ${transactionWebService.abbreviateDollars(u.salesReport?.sales?.usdValue ? u.salesReport?.sales?.usdValue : 0, 2)}
+                                                    </td>
+
+                                                    <td class="text-cell">
+                                                        ${u.lastActive ? moment(u.lastActive).fromNow() : ""}
+                                                    </td>
+
+
+                                                </tr>
+                                            
+                                            `)}
+                                            </tbody>
+                                
+                                        </table>
+                                                                
+                                    </div>
+                                </div>
+
+                                <div class="block margin-top margin-bottom">
+                                    <div class="row">
+                                        <div class="col-50">
+                                            ${showPrevious ? $h`
+                                            <a href="/leaderboard/?pageNumber=${pageNumber - 1}" class="button button-outline color-gray">Previous</a>
+                                            ` : $h` `}
+                                        </div>
+                                        <div class="col-50">
+                                            ${showNext ? $h`
+                                            <a href="/leaderboard/?pageNumber=${pageNumber + 1}" class="button button-fill">Next</a>
+                                            ` : $h` `}
+                                        </div>
+                                    </div>
+                        
+                                </div>
+
+
+                            </div>
+
+
+                            <div class="hide-on-pageinit">
+
+                                <div class="card skeleton-text">
+                                    <div class="card-header">Leaderboard</div>
+                                    <div class="card-content card-content-padding data-table">
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi
+                                        lobortis et massa ac interdum. Cras consequat felis at consequat hendrerit.
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            
+<div class="block block-strong inset">
+
+    <span class="footer-link">
+      <strong>Large NFT</strong> code licensed under <a href="https://github.com/LargeNFT/large-nft/blob/master/LICENSE.md" class="external">MIT</a>
+    </span>
+
+    |
+
+    <span class="footer-link">
+      <a href="https://github.com/LargeNFT/large-nft" class="external">GitHub</a>
+    </span>
+
+    |
+
+    <span class="footer-link">
+      <a href="https://twitter.com/large_nft" class="external">Twitter</a>
+    </span>
+
+</div>
+                        </div>
+                    </div>
+            
+                </div>
+              
+            
+            </div>
+
+        </div>
+
+    </div>
+
+    
+    <script type="module" id="page-init-scripts">
+
+        const init = (props, { $, $f7, $h, $on, $update }) => {
+
+            let tokenOwnerPageService = globalThis.container.get("TokenOwnerPageService")
+            let transactionWebService = globalThis.container.get("TransactionWebService")
+
+            let walletService = globalThis.container.get("WalletService")
+            let moment = globalThis.moment 
+
+
+            let baseURL = '/'
+
+            let tokenOwners
+            let pageNumber = 0
+            let totals = {}
+            let lastUpdated
+
+            let showNext
+            let showPrevious
+
+            const loadLeaderboard = async () => {
+            
+                loading = true
+
+                try  {
+
+                    if ($f7.views.main.router.currentRoute?.query?.pageNumber) {
+                        pageNumber = parseInt($f7.views.main.router.currentRoute?.query?.pageNumber)
+                    }
+
+                    totals = await tokenOwnerPageService.getTotals()
+                    let page = await tokenOwnerPageService.get(pageNumber)
+
+                    tokenOwners = page.tokenOwners
+
+                    let latest = await transactionWebService.getLatest()
+
+                    lastUpdated = latest.lastUpdated
+
+                    showNext = pageNumber < totals.totalPages - 1 
+                    showPrevious = pageNumber > 0
+
+                } catch(ex) { console.log(ex) }
+                
+                $('.hidden-on-load').removeClass('hidden-on-load')
+
+
+                loading = false
+
+                await $update()
+
+            }
+
+
+            $on('pageInit', async () => {
+
+                await loadLeaderboard()
+
+                $('.hide-on-pageinit').hide()
+
+
+                await $update()
+
+
+            })
+
+
+            document.querySelector('meta[property="og:title"]').setAttribute("content", "Leaderboard for Alice&#39;s Adventures in Wonderland")
+            document.querySelector('meta[property="og:url"]').setAttribute("content", "/leaderboard")
+            document.querySelector('meta[property="og:image"]').setAttribute("content", "https://readalice.com/backup/export/images/QmeL8dxWDhVAMA4o4PDzMiF6C8avTuQnkHDGbvoNZszxLS.jpg")
+            document.querySelector('meta[property="og:description"]').setAttribute("content", "Leaderboard for Alice&#39;s Adventures in Wonderland")
+
+            document.querySelector('meta[property="twitter:url"]').setAttribute("content", "/leaderboard")
+            document.querySelector('meta[property="twitter:title"]').setAttribute("content", "Leaderboard Alice&#39;s Adventures in Wonderland")
+            document.querySelector('meta[property="twitter:image"]').setAttribute("content", "https://readalice.com/backup/export/images/QmeL8dxWDhVAMA4o4PDzMiF6C8avTuQnkHDGbvoNZszxLS.jpg")
+            document.querySelector('meta[property="twitter:description"]').setAttribute("content", "Leaderboard for Alice&#39;s Adventures in Wonderland" )
+
+            document.querySelector('title').innerHTML = "Leaderboard Alice&#39;s Adventures in Wonderland"
+
+            $f7.preloader.hide()
+
+            return $render
+
+        }
+
+
+    </script>
+
+    <script type="module" id="page-scripts">
+
+        let baseURL = '/'
+        let hostname = 'https://readalice.com'
+        let channelId = '411f8c34-31d3-4dcb-9139-2f7334377c66'
+        let version = atob('IjAuNi42Ig==').replace('"', '').replace('"', '')
+
+        let routablePages = JSON.parse(`[{"name":"About","locations":["links"],"channelId":"411f8c34-31d3-4dcb-9139-2f7334377c66","slug":"about","dateCreated":"2022-07-12T21:24:16.486Z","_id":"95d31c41-430e-4b92-92b2-4605b05c9e7a"}]`)
+
+        let app = reader.initReader(baseURL, hostname, version, routablePages, channelId )
+
+
+
+    </script>
+
+</body>
+
+</html>
