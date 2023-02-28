@@ -323,6 +323,8 @@
 
                     let result = await itemWebService.attributeItemPage(traitType, value, page)
 
+                    console.log(result)
+
                     firstPageItems = result.items
                     totalTokens = result.totalMatches
 
@@ -451,6 +453,7 @@
                     }
 
                 } catch (ex) {
+                    hasMoreItems = false
                     console.log(ex)
                 }
 
