@@ -29,6 +29,5 @@
     ],
 
     "headStart": "src/headStart.ejs",
-    "footer": "src/footer.ejs",
-    "additionalStaticPages": "../../largenft-org/src/additionalStaticPages.json"
+    "footer": "src/footer.ejs"
 } 
