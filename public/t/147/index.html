@@ -5,15 +5,7 @@
 
 <head>
 
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-P3HBBWJ4X4"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-P3HBBWJ4X4');
-</script>
+    
 
     <style>
     html {
@@ -63,6 +55,7 @@
                     title="Alice&#39;s Adventures in Wonderland"
                     show_mint_page="true"
                     show_activity_page="true"
+                    breadcrumbs=${breadcrumbs}
                 >
                 </nav-bar>
 
@@ -71,21 +64,6 @@
                     item_count="500" 
                 >
                 </token-toolbar>
-
-<!--                 
-                <div class="fab fab-left-center small-only">
-                    <a href="#"> 
-                        <i class="icon f7-icons color-blue">arrow_left</i>
-                    </a>
-                </div>
-    
-                                    <div class="fab fab-right-center small-only">
-                        <a href="#">
-                            <i class="icon f7-icons color-blue">arrow_right</i>
-                        </a>
-                    </div>
-                 -->
-
            
                 <div class="page-content">
                     <div class="swiper" id="swiper-147" style="display:none;">
@@ -96,27 +74,7 @@
                             </div> 
 
                             <div class="swiper-slide">
-                                
-                                <div class="block block-strong inset col-100 no-margin-bottom">
-                                    <div class="breadcrumbs ">
-                                      <div class="breadcrumbs-item">
-                                        <a href="/index.html" class="link">
-                                          Home
-                                        </a>
-                                      </div>    
-                                      <div class="breadcrumbs-separator"></div>
-                                      <div class="breadcrumbs-item">
-                                        <a href="/explore.html" class="link">
-                                          Explore
-                                        </a>
-                                      </div>     
-                                      <div class="breadcrumbs-separator"></div>
-                                      <div class="breadcrumbs-item breadcrumbs-item-active">
-                                        #147 
-                                      </div> 
-                                    </div>
-                                </div>
-                                
+                                                                
                                 <div class="row">
                                 
                                     <div class="col-100 large-75">
@@ -379,9 +337,9 @@
 
     <br /><br />
 
-    <span class='footer-link'><a href='https://largenft.org/privacy'>Privacy Policy</a></span> |
-    <span class='footer-link'><a href='https://largenft.org/terms'>Terms</a></span> | 
-    <span class='footer-link'><a href='https://largenft.org/disclaimer'>Disclaimer</a></span>
+    <span class='footer-link'><a href='https://largenft.org/privacy' class="external">Privacy Policy</a></span> |
+    <span class='footer-link'><a href='https://largenft.org/terms' class="external">Terms</a></span> | 
+    <span class='footer-link'><a href='https://largenft.org/disclaimer' class="external">Disclaimer</a></span>
 </div>
 
 
@@ -437,6 +395,22 @@
             let tokenService = globalThis.container.get("TokenService")
 
             let baseURI = globalThis.container.get("baseURI")
+
+            let title = ``
+            let tokenId = `147`
+            
+
+            let breadcrumbs = [{
+                text: "Home",
+                path: "index.html"
+            }, {
+                text: "Explore",
+                path: "explore.html"
+            },{
+                
+                text: title ? title : `#${tokenId}`
+            }]
+
 
             let hasPrevious = JSON.parse(`true`)
             let hasNext = JSON.parse(`true`)
@@ -606,19 +580,20 @@
 
     </script>
 
-    <script type="module" id="page-scripts">
+    
 
-        let baseURL = '/'
-        let hostname = 'https://readalice.com'
-        let channelId = '411f8c34-31d3-4dcb-9139-2f7334377c66'
-        let version = atob('IjAuNi43Ig==').replace('"', '').replace('"', '')
+<script type="module" id="page-scripts">
 
-        let routablePages = JSON.parse(`[{"name":"About","locations":["links"],"channelId":"411f8c34-31d3-4dcb-9139-2f7334377c66","slug":"about","dateCreated":"2022-07-12T21:24:16.486Z","_id":"95d31c41-430e-4b92-92b2-4605b05c9e7a"}]`)
+    let baseURL = '/'
+    let hostname = 'https://readalice.com'
+    let channelId = '411f8c34-31d3-4dcb-9139-2f7334377c66'
+    let version = atob('IjAuNi45Ig==').replace('"', '').replace('"', '')
 
-        let app = reader.initReader(baseURL, hostname, version, routablePages, channelId )
+    let routablePages = JSON.parse(`[{"name":"About","locations":["links"],"channelId":"411f8c34-31d3-4dcb-9139-2f7334377c66","slug":"about","dateCreated":"2022-07-12T21:24:16.486Z","_id":"95d31c41-430e-4b92-92b2-4605b05c9e7a"}]`)
 
-    </script>
+    let app = reader.initReader(baseURL, hostname, version, routablePages, channelId )
 
+</script>
     
 
 </body>

@@ -28,6 +28,6 @@
         }
     ],
 
-    "headStart": "src/headStart.ejs",
-    "footer": "src/footer.ejs"
+    "footer": "src/footer.ejs",
+    "adminFooter": "src/adminFooter.ejs"
 } 

@@ -4,15 +4,7 @@
 
   <head>
 
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-P3HBBWJ4X4"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-P3HBBWJ4X4');
-</script>
+    
 
     <style>
       html {
@@ -63,9 +55,10 @@
 
           <nav-bar
               logo="/backup/export/images/QmeL8dxWDhVAMA4o4PDzMiF6C8avTuQnkHDGbvoNZszxLS.jpg"
-              title="Alice&#39;s Adventures in Wonderland"
+              title="Attributes"
               show_mint_page="true"
               show_activity_page="true"
+              breadcrumbs=${breadcrumbs}
           >
           </nav-bar>
 
@@ -76,8 +69,8 @@
 
               <div class="hidden-on-load">
 
-                <div class="block-title block-title-medium">Attribute Report</div>
-                <div class="card scarcity-report-card data-table">
+                <div class="block-title block-title-medium large-only">Attributes</div>
+                <div class="card scarcity-report-card data-table margin-top">
   
                   <div class="card-content">
 
@@ -1933,9 +1926,9 @@
 
     <br /><br />
 
-    <span class='footer-link'><a href='https://largenft.org/privacy'>Privacy Policy</a></span> |
-    <span class='footer-link'><a href='https://largenft.org/terms'>Terms</a></span> | 
-    <span class='footer-link'><a href='https://largenft.org/disclaimer'>Disclaimer</a></span>
+    <span class='footer-link'><a href='https://largenft.org/privacy' class="external">Privacy Policy</a></span> |
+    <span class='footer-link'><a href='https://largenft.org/terms' class="external">Terms</a></span> | 
+    <span class='footer-link'><a href='https://largenft.org/disclaimer' class="external">Disclaimer</a></span>
 </div>
 
 
@@ -1971,6 +1964,13 @@
 
             let loading
             let attributesOverall
+
+            let breadcrumbs = [{
+                text: "Home",
+                path: "index.html"
+            }, {
+                text: "Attributes"
+            }]
 
             const loadOverallSales = async () => {
                 
@@ -2044,21 +2044,20 @@
 
     </script>
 
-    <script type="module" id="page-scripts">
+  
 
-      let baseURL = '/'
-      let hostname = 'https://readalice.com'
-      let channelId = '411f8c34-31d3-4dcb-9139-2f7334377c66'
-      let version = atob('IjAuNi43Ig==').replace('"', '').replace('"', '')
+<script type="module" id="page-scripts">
 
-      let routablePages = JSON.parse(`[{"name":"About","locations":["links"],"channelId":"411f8c34-31d3-4dcb-9139-2f7334377c66","slug":"about","dateCreated":"2022-07-12T21:24:16.486Z","_id":"95d31c41-430e-4b92-92b2-4605b05c9e7a"}]`)
+    let baseURL = '/'
+    let hostname = 'https://readalice.com'
+    let channelId = '411f8c34-31d3-4dcb-9139-2f7334377c66'
+    let version = atob('IjAuNi45Ig==').replace('"', '').replace('"', '')
 
-      let app = reader.initReader(baseURL, hostname, version, routablePages, channelId )
+    let routablePages = JSON.parse(`[{"name":"About","locations":["links"],"channelId":"411f8c34-31d3-4dcb-9139-2f7334377c66","slug":"about","dateCreated":"2022-07-12T21:24:16.486Z","_id":"95d31c41-430e-4b92-92b2-4605b05c9e7a"}]`)
 
+    let app = reader.initReader(baseURL, hostname, version, routablePages, channelId )
 
-
-    </script>
-
+</script>
   </body>
 
 </html>

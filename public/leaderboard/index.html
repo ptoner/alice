@@ -5,15 +5,7 @@
 
 <head>
 
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-P3HBBWJ4X4"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-P3HBBWJ4X4');
-</script>
+    
 
     <style>
     html {
@@ -64,6 +56,7 @@
                     active="Leaderboard"
                     show_mint_page="true"
                     show_activity_page="true"
+                    breadcrumbs=${breadcrumbs}
                 >
                 </nav-bar>
 
@@ -75,28 +68,13 @@
                         <div class="fixed-width-content center">
                             
                             <div class="hidden-on-load">
-                                <div class="block block-strong inset col-100 no-margin-bottom">
-                                    <div class="breadcrumbs ">
-                                      <div class="breadcrumbs-item">
-                                        <a href="/index.html" class="link">
-                                          Home
-                                        </a>
-                                      </div>       
-                                      <div class="breadcrumbs-separator"></div>
-                                      <div class="breadcrumbs-item breadcrumbs-item-active">
-                                        <a href="/leaderboard" class="link">
-                                            Leaderboard
-                                        </a>
-                                        
-                                      </div> 
-                                    </div>
-                                </div>
                             
-                                <div class="card data-table">
-                                    <div class="card-header">
-                                        Leaderboard <span class="last-updated">Last updated: ${moment(lastUpdated).fromNow()}</span>
+                                <div class="block-title block-title-medium">
+                                    <div class="last-updated">Last updated: ${moment(lastUpdated).fromNow()}</div>
+                                    <span class="large-only">Leaderboard</span>
+                                </div>
 
-                                    </div>
+                                <div class="card data-table">
                                     <div class="card-content">
                                         
                                         <table class="leaderboard-table">
@@ -202,9 +180,9 @@
 
     <br /><br />
 
-    <span class='footer-link'><a href='https://largenft.org/privacy'>Privacy Policy</a></span> |
-    <span class='footer-link'><a href='https://largenft.org/terms'>Terms</a></span> | 
-    <span class='footer-link'><a href='https://largenft.org/disclaimer'>Disclaimer</a></span>
+    <span class='footer-link'><a href='https://largenft.org/privacy' class="external">Privacy Policy</a></span> |
+    <span class='footer-link'><a href='https://largenft.org/terms' class="external">Terms</a></span> | 
+    <span class='footer-link'><a href='https://largenft.org/disclaimer' class="external">Disclaimer</a></span>
 </div>
 
 
@@ -244,6 +222,15 @@
 
             let baseURL = '/'
 
+            let breadcrumbs = [{
+                text: "Home",
+                path: "index.html"
+            }, {
+                text: "Leaderboard",
+                path: "leaderboard"
+            }]
+
+
             let tokenOwners
             let pageNumber = 0
             let totals = {}
@@ -261,6 +248,10 @@
                     if ($f7.views.main.router.currentRoute?.query?.pageNumber) {
                         pageNumber = parseInt($f7.views.main.router.currentRoute?.query?.pageNumber)
                     }
+
+                    breadcrumbs.push({
+                        text: `Page ${pageNumber + 1}`
+                    })
 
                     totals = await tokenOwnerPageService.getTotals()
                     let page = await tokenOwnerPageService.get(pageNumber)
@@ -320,21 +311,20 @@
 
     </script>
 
-    <script type="module" id="page-scripts">
+    
 
-        let baseURL = '/'
-        let hostname = 'https://readalice.com'
-        let channelId = '411f8c34-31d3-4dcb-9139-2f7334377c66'
-        let version = atob('IjAuNi43Ig==').replace('"', '').replace('"', '')
+<script type="module" id="page-scripts">
 
-        let routablePages = JSON.parse(`[{"name":"About","locations":["links"],"channelId":"411f8c34-31d3-4dcb-9139-2f7334377c66","slug":"about","dateCreated":"2022-07-12T21:24:16.486Z","_id":"95d31c41-430e-4b92-92b2-4605b05c9e7a"}]`)
+    let baseURL = '/'
+    let hostname = 'https://readalice.com'
+    let channelId = '411f8c34-31d3-4dcb-9139-2f7334377c66'
+    let version = atob('IjAuNi45Ig==').replace('"', '').replace('"', '')
 
-        let app = reader.initReader(baseURL, hostname, version, routablePages, channelId )
+    let routablePages = JSON.parse(`[{"name":"About","locations":["links"],"channelId":"411f8c34-31d3-4dcb-9139-2f7334377c66","slug":"about","dateCreated":"2022-07-12T21:24:16.486Z","_id":"95d31c41-430e-4b92-92b2-4605b05c9e7a"}]`)
 
+    let app = reader.initReader(baseURL, hostname, version, routablePages, channelId )
 
-
-    </script>
-
+</script>
 </body>
 
 </html>
